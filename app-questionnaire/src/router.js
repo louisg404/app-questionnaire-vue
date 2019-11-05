@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Questionnaire from './views/Questionnaire.vue'
+import Resultats from './views/Resultats.vue'
+import Profil from './views/Profil.vue'
 
 Vue.use(Router)
 
@@ -9,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'profil',
-      component: () => import(/* webpackChunkName: "profil" */ './views/Profil.vue')
+      component: Profil
     },
     {
       path: '/questionnaire',
@@ -19,7 +21,7 @@ export default new Router({
     {
       path: '/resultats',
       name: 'resultats',
-      component: () => import(/* webpackChunkName: "resultats" */ './views/Resultats.vue')
+      component: Resultats
     }
   ]
 })

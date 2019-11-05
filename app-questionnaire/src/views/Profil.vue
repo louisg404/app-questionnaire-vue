@@ -24,8 +24,6 @@
     </el-row>
 </template>
 
-<script src="https://cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.min.js"></script>
-
 <script>
 import router from "../router";
 

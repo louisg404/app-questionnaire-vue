@@ -5,7 +5,7 @@
             <span style="font-size: 1.5em;">{{ question.libelle }}</span>
         </div>
         <div v-for="item in question.reponse" :key="item">
-            <el-checkbox style="margin-bottom: 15px;" v-model="item.user">
+            <el-checkbox style="margin-bottom: 15px;" v-model="item.value">
                 <span style="font-size: 1.2em;">{{item.libelle}}</span>
             </el-checkbox>
         </div>
