@@ -1,2 +1,1 @@
-## Questionnaire VueJS
-#### Louis GAUTIER - EPSI
+Thanks to @mathxi 👏
