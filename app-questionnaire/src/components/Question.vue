@@ -1,12 +1,15 @@
 <template>
     <div>
-        <p>{{ question.libelle }}</p>
-    
+        <el-card class="box-card">
+        <div slot="header" class="clearfix">
+            <span style="font-size: 1.5em;">{{ question.libelle }}</span>
+        </div>
         <div v-for="item in question.reponse" :key="item">
-            <el-checkbox v-model="item.user">
-                {{item.libelle}}
+            <el-checkbox style="margin-bottom: 15px;" v-model="item.user">
+                <span style="font-size: 1.2em;">{{item.libelle}}</span>
             </el-checkbox>
         </div>
+        </el-card>
     </div>
 </template>
 
