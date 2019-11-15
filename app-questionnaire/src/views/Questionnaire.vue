@@ -1,8 +1,11 @@
 <template>
   <el-main>
-    <h1 style="margin-bottom: 5%;">Bonjour {{firstname}} {{name}}</h1>
+    <h1 style="margin-bottom: 5%;">👋 Bonjour {{firstname}} {{name}}</h1>
+
+    <!-- Composant 'Question' qui affiche la question courante -->
     <question :question="questions[getQuestionIndex()]"></question>
 
+    <!-- Barre de progression -->
     <el-progress
       style="margin-top: 3%;"
       :text-inside="true"
@@ -10,6 +13,7 @@
       :percentage="this.currentQuestion*10"
     ></el-progress>
 
+    <!-- Bouton précédent -->
     <el-button
       v-if="getQuestionIndex() != 0"
       style="margin-top: 1%; margin-right: 1%;"
@@ -19,6 +23,7 @@
       circle
     ></el-button>
 
+    <!-- Bouton suivant -->
     <el-button
       v-if="getQuestionIndex() != 9"
       style="margin-top: 1%;"
@@ -28,7 +33,9 @@
       circle
     ></el-button>
 
+    <!-- Bouton envoyer -->
     <el-button round style="margin-top: 1%; float: right;" type="primary" @click="onSubmit">Envoyer</el-button>
+    <h1>{{this.nbBoneReponse}}</h1>
   </el-main>
 </template>
 
@@ -43,6 +50,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      // Système de calcul de bonne(s) réponse(s)
       const questionsVraies = this.questions.map(currentQuestion => {
         return currentQuestion.reponse.map(currentReponse => {
           return currentQuestion.vraieReponse.find(currVraieReponse => {
@@ -53,7 +61,8 @@ export default {
           });
         });
       });
-      let nbBonneReponse = 0;
+
+      // Compteur de bonne(s) réponse(s)
       questionsVraies.forEach(question => {
         let isQuestionBonne = true;
         question.forEach(element => {
@@ -62,27 +71,32 @@ export default {
           }
         });
         if (isQuestionBonne) {
-          nbBonneReponse++;
+          this.nbBonneReponse++;
         }
       });
-      console.log("Nombre de bonnes réponses : ", nbBonneReponse);
+
+      // Envoyer le nombre de bonnes réponses à la page 'résultats'
+      console.log("Nombre de bonnes réponses : ", this.nbBonneReponse);
       router.push({
         name: "resultats",
         query: {
-          nbBonneReponse: this.nbBonneReponse
+          nb: this.nbBonneReponse
         }
       });
     },
+
     //Méthode pour retourner l'index de la question actuelle
     getQuestionIndex() {
       return this.currentQuestion;
     },
+
     //Méthode pour accéder à la question précédente
     questionPrev() {
       if (0 < this.currentQuestion) {
         this.currentQuestion--;
       }
     },
+    
     //Méthode pour accéder à la question suivante
     questionNext() {
       if (this.questions.length > this.currentQuestion) {
@@ -92,10 +106,17 @@ export default {
   },
   data() {
     return {
+      // Initialisation index question courante
       currentQuestion: 0,
+
+      // Initialisation du nombre de bonne(s) réponse(s)
+      nbBonneReponse: 0,
+
+      // Récupération nom/prénom
       name: this.$route.query.name,
       firstname: this.$route.query.firstname,
-      nbBonneReponse: this.$route.query.nbBonneReponse,
+      
+      // Questions au format JSON
       questions: [
         {
           libelle: "Combien de pattes a un canard ?",
@@ -109,10 +130,10 @@ export default {
           ]
         },
         {
-          libelle: "Combien de tête(s) a un lion ?",
+          libelle: "Cri du lion ?",
           reponse: [
-            { id: 1, libelle: "24", value: false },
-            { id: 2, libelle: "1", value: false }
+            { id: 1, libelle: "Bêlement", value: false },
+            { id: 2, libelle: "Rugissement", value: false }
           ],
           vraieReponse: [
             { idReponse: 1, value: false },
@@ -157,7 +178,7 @@ export default {
         {
           libelle: "Second, poteau...",
           reponse: [
-            { id: 1, libelle: "...Valère Germain", value: false },
+            { id: 1, libelle: "...Griezmann", value: false },
             { id: 2, libelle: "...Pavard", value: false }
           ],
           vraieReponse: [
@@ -166,10 +187,10 @@ export default {
           ]
         },
         {
-          libelle: "Le meilleur joueur actuel ?",
+          libelle: "10 + 6",
           reponse: [
-            { id: 1, libelle: "Lionel Messi", value: false },
-            { id: 2, libelle: "Cristiano Ronaldo", value: false }
+            { id: 1, libelle: "16", value: false },
+            { id: 2, libelle: "18", value: false }
           ],
           vraieReponse: [
             { idReponse: 1, value: true },
@@ -194,21 +215,21 @@ export default {
           ]
         },
         {
-          libelle: "Meilleur langage ?",
+          libelle: "PHP > Java",
           reponse: [
-            { id: 1, libelle: "Java", value: false },
-            { id: 2, libelle: "PHP", value: false }
+            { id: 1, libelle: "Vrai", value: false },
+            { id: 2, libelle: "Faux", value: false }
           ],
           vraieReponse: [
-            { idReponse: 1, value: false },
-            { idReponse: 2, value: true }
+            { idReponse: 1, value: true },
+            { idReponse: 2, value: false }
           ]
         },
         {
-          libelle: "Meilleur club actuel ?",
+          libelle: "5 x 10",
           reponse: [
-            { id: 1, libelle: "Atletico de Madrid", value: false },
-            { id: 2, libelle: "Paris Saint-Germain", value: false }
+            { id: 1, libelle: "50", value: false },
+            { id: 2, libelle: "500", value: false }
           ],
           vraieReponse: [
             { idReponse: 1, value: true },

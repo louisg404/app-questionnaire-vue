@@ -9,6 +9,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      // La page 'profil' sera la page d'accueil
       path: '/',
       name: 'profil',
       component: Profil

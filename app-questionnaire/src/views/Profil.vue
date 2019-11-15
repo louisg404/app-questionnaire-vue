@@ -2,6 +2,7 @@
     <el-row>
       <el-col :xs="20" :sm="20" :md="20" :lg="10" :xl="10">
         <div class="grid-content bg-purple">
+            <!-- Formulaire de contact -->
             <el-form ref="form" :model="form" label-width="120px">
               <el-form-item label="Nom">
                 <el-input v-model="form.name" required></el-input>
@@ -30,6 +31,7 @@ import router from "../router";
   export default {
     methods: {
       onSubmit() {
+        // Envoyer le nom et prénom à la page 'questionnaire'
         router.push({
           name: 'questionnaire',
           query: {
@@ -37,6 +39,8 @@ import router from "../router";
             firstname: this.form.firstname
           }
         }),
+
+        // Notification de validation formulaire
         this.$notify({
           title: 'Validé',
           message: 'Formulaire validé',

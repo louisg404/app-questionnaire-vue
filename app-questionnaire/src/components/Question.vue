@@ -1,6 +1,7 @@
 <template>
     <div>
-        <el-card class="box-card">
+        <!-- Template d'une question -->
+        <el-card shadow="hover" class="box-card">
         <div slot="header" class="clearfix">
             <span style="font-size: 1.5em;">{{ question.libelle }}</span>
         </div>
